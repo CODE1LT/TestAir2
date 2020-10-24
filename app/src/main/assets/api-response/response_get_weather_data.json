@@ -1,0 +1,14 @@
+[
+  {
+    "InstallationId": "637177221694793980",
+    "StartDateTime": "2020-05-16T18:00:00Z",
+    "EndDateTime": "2020-05-16T19:00:00Z",
+    "Value": 5555.0
+  },
+  {
+    "InstallationId": "637177221694793980",
+    "StartDateTime": "2020-05-16T19:00:00Z",
+    "EndDateTime": "2020-05-16T20:00:00Z",
+    "Value": 7777.0
+  }
+]
