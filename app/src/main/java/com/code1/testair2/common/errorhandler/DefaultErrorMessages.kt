@@ -1,7 +1,7 @@
 package com.code1.testair2.common.errorhandler
 
 import com.code1.testair2.R
-import com.code1.testair2.feature.citysearch.NoCityError
+import com.code1.testair2.feature.citysearch.presentation.NoCityError
 import kotlin.reflect.KClass
 
 object DefaultErrorMessages {

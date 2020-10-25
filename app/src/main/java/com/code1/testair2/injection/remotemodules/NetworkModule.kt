@@ -26,6 +26,7 @@ import javax.inject.Singleton
 
 const val KEY_CONTENT_TYPE = "KEY_CONTENT_TYPE"
 const val KEY_NETWORKING_MODULE = "KEY_NETWORKING_MODULE"
+const val APPID = "7587eaff3affbf8e56a81da4d6c51d06"
 
 @Module
 class NetworkModule {

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.code1.testair2.feature.citysearch.CitySearchFragmentViewModel" />
+            type="com.code1.testair2.feature.citysearch.presentation.CitySearchFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
