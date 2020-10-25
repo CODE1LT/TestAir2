@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="corner_radius">12dp</dimen>
+    <dimen name="rv_default_padding">15dp</dimen>
+    <dimen name="rv_item_default_guidline">15dp</dimen>
+</resources>

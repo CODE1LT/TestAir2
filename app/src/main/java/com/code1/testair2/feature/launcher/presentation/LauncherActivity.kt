@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_launcher.*
 import timber.log.Timber
 import javax.inject.Inject
 
-
 class LauncherActivity : DaggerAppCompatActivity() {
 
     @Inject
@@ -24,8 +23,6 @@ class LauncherActivity : DaggerAppCompatActivity() {
     private lateinit var viewModel: LauncherViewModel
 
     private lateinit var dataBinding: ActivityLauncherBinding
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,27 +36,12 @@ class LauncherActivity : DaggerAppCompatActivity() {
         dataBinding.viewModel = viewModel
     }
 
-//    fun onUpClick() {
-//        Timber.d("onUpClick()")
-//        onSupportNavigateUp()
-//    }
-//
-//    override fun onSupportNavigateUp() =
-//        findNavController(R.id.navHostFragment).navigateUp()
-
-    fun onSearchButtonClicked(cityName: String?) {
-        Timber.d("onUserItemClicked()")
-//        navigateTo(
-//            R.id.action_citySearch_to_citiesList,
-//            CitiesListFragmentArgs(cityName).toBundle()
-//        )
+    fun onUpClick() {
+        Timber.d("onUpClick()")
+        onSupportNavigateUp()
     }
 
-//    private fun navigateTo(id: Int, bundle: Bundle? = null) {
-//        val navHostFragment = navHostFragment as NavHostFragment
-//        val navController = navHostFragment.navController
-//        navController.navigate(id, bundle)
-//    }
+    override fun onSupportNavigateUp() =
+        findNavController(R.id.navHostFragment).navigateUp()
 
-    fun setActionBar(toolbar: Toolbar) = setSupportActionBar(toolbar)
 }

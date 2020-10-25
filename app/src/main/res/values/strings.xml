@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">TestAir2</string>
+    <string name="app_name">Testair</string>
+    <string name="f_city_search_city_name_et_hint">ENTER CITY NAME</string>
+    <string name="f_city_search_history_bt_text">VIEW HISTORY</string>
+    <string name="i_city_tv_temperature_symbol_text">\u00B0</string>
+    <string name="f_city_search_tst_no_city_name">Please enter city name</string>
+    <string name="f_cities_list_tst_completed_successfully_text">Operation completed successfully</string>
+    <string name="error_not_found">Information not found</string>
+    <string name="error_generic">Something went wrong, please try again later or contact our support</string>
 </resources>
