@@ -2,19 +2,13 @@
 package com.code1.testair2.feature.citieslist.presentation
 
 import androidx.lifecycle.ViewModel
+import com.code1.testair2.feature.citieslist.domain.CitiesRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
-import lt.code1.testair.archextensions.ViewModelKey
-import lt.code1.testair.datalayer.cities.entities.CitiesListEntity
-import lt.code1.testair.datalayer.core.Resource
-import lt.code1.testair.domain.RetrieveSingleInteractor
-import lt.code1.testair.domain.RetrieveSingleInteractorWithParams
 import com.code1.testair2.feature.citieslist.domain.model.CityInlinedDomainModel
-import com.code1.testair2.feature.citieslist.domain.usecase.CitiesListMapper
-import com.code1.testair2.feature.citieslist.domain.usecase.FetchCityInteractor
-import com.code1.testair2.feature.citieslist.domain.usecase.GetCitiesListInteractor
+import com.code1.testair2.feature.citieslist.domain.usecase.*
 import javax.inject.Named
 
 @Module
@@ -50,5 +44,9 @@ abstract class CitiesListFragmentModule {
     abstract fun provideCitiesListMapper(
         citiesListMapper: CitiesListMapper
     ): @JvmSuppressWildcards Function1<@JvmSuppressWildcards List<CitiesListEntity>, @JvmSuppressWildcards List<CityInlinedDomainModel>>
+
+    @Provides
+    fun provideGetCitiesListUseCase(citiesRepository: CitiesRepository): GetCitiesListUseCase =
+        GetCitiesListUseCaseImpl(citiesRepository)
 
 }
