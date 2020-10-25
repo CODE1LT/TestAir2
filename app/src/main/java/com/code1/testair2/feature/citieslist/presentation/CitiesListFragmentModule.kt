@@ -11,10 +11,10 @@ import lt.code1.testair.datalayer.cities.entities.CitiesListEntity
 import lt.code1.testair.datalayer.core.Resource
 import lt.code1.testair.domain.RetrieveSingleInteractor
 import lt.code1.testair.domain.RetrieveSingleInteractorWithParams
-import lt.code1.testair.features.citieslist.data.City
-import lt.code1.testair.features.citieslist.interactors.CitiesListMapper
-import lt.code1.testair.features.citieslist.interactors.FetchCityInteractor
-import lt.code1.testair.features.citieslist.interactors.GetCitiesListInteractor
+import com.code1.testair2.feature.citieslist.domain.model.CityInlinedDomainModel
+import com.code1.testair2.feature.citieslist.domain.usecase.CitiesListMapper
+import com.code1.testair2.feature.citieslist.domain.usecase.FetchCityInteractor
+import com.code1.testair2.feature.citieslist.domain.usecase.GetCitiesListInteractor
 import javax.inject.Named
 
 @Module
@@ -40,15 +40,15 @@ abstract class CitiesListFragmentModule {
 
     @Binds
     abstract fun provideFetchInteractor(fetchCityInteractor: FetchCityInteractor)
-            : RetrieveSingleInteractorWithParams<String, Resource<@JvmSuppressWildcards List<City>>>
+            : RetrieveSingleInteractorWithParams<String, Resource<@JvmSuppressWildcards List<CityInlinedDomainModel>>>
 
     @Binds
     abstract fun provideGetCitiesListInteractor(getCitiesListInteractor: GetCitiesListInteractor)
-            : RetrieveSingleInteractor<Resource<@JvmSuppressWildcards List<City>>>
+            : RetrieveSingleInteractor<Resource<@JvmSuppressWildcards List<CityInlinedDomainModel>>>
 
     @Binds
     abstract fun provideCitiesListMapper(
         citiesListMapper: CitiesListMapper
-    ): @JvmSuppressWildcards Function1<@JvmSuppressWildcards List<CitiesListEntity>, @JvmSuppressWildcards List<City>>
+    ): @JvmSuppressWildcards Function1<@JvmSuppressWildcards List<CitiesListEntity>, @JvmSuppressWildcards List<CityInlinedDomainModel>>
 
 }

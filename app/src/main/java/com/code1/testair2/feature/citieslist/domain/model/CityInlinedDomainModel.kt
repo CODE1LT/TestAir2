@@ -1,6 +1,6 @@
-package lt.code1.testair.features.citieslist.data
+package com.code1.testair2.feature.citieslist.domain.model
 
-data class City(
+data class CityInlinedDomainModel(
     val id: Long?,
     val name: String?,
     val dt: Long?,

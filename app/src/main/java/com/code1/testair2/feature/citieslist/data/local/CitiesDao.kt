@@ -8,12 +8,12 @@ private const val CITIES_SEARCH_HISTORY_SIZE_LIMIT = 5
 abstract class CitiesDao {
 
     @Query("SELECT * FROM cities ORDER BY rowId DESC")
-    abstract fun queryCities(): List<CityEntity>?
+    abstract suspend fun queryCities(): List<CityEntity>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun addCity(city: CityEntity)
+    abstract suspend fun addCity(city: CityEntity)
 
     @Query("DELETE FROM cities WHERE rowId NOT IN (SELECT rowId FROM cities ORDER BY rowId DESC LIMIT $CITIES_SEARCH_HISTORY_SIZE_LIMIT)")
-    abstract fun cleanupSearchHistory()
+    abstract suspend fun cleanupSearchHistory()
 
 }

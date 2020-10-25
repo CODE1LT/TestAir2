@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CitiesRepository {
     suspend fun fetchCity(city: String): Flow<Result<List<CitiesListDomainModel>>>
-    fun getCitiesList(): Flow<Result<List<CitiesListDomainModel>>>
+    suspend fun getCitiesList(): Flow<Result<List<CitiesListDomainModel>>>
 }

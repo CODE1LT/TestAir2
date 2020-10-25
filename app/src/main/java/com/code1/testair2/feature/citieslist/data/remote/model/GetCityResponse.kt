@@ -1,9 +1,7 @@
 package com.code1.testair2.feature.citieslist.data.remote.model
 
 import com.code1.testair2.feature.citieslist.data.local.CitiesListEntity
-import com.code1.testair2.feature.citieslist.domain.model.CityDomainModel
-import com.code1.testair2.feature.citieslist.domain.model.MainDomainModel
-import com.code1.testair2.feature.citieslist.domain.model.WeatherDomainModel
+import com.code1.testair2.feature.citieslist.domain.model.CitiesListDomainModel
 import com.google.gson.annotations.SerializedName
 
 data class GetCityResponse(
@@ -25,21 +23,15 @@ data class Weather (
     @SerializedName("icon") val icon: String?
 )
 
-fun GetCityResponse.toDomainModel() = CityDomainModel(
+fun GetCityResponse.toDomainModel() = CitiesListDomainModel(
     id = id,
     name = name,
     dt = dt,
-    main = MainDomainModel (
-        temp = main?.temp,
-        temp_min = main?.temp_min,
-        temp_max = main?.temp_max
-    ),
-    weather = weather?.map {
-        WeatherDomainModel(
-            description = it.description,
-            icon = it.icon
-        )
-    }
+    temp = main?.temp,
+    temp_min = main?.temp_min,
+    temp_max = main?.temp_max,
+    icon = weather?.get(0)?.icon,
+    description = weather
 )
 
 fun GetCityResponse.toEntity() =             CitiesListEntity(

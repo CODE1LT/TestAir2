@@ -5,7 +5,7 @@ import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import lt.code1.testair.databinding.ItemCityBinding
-import lt.code1.testair.features.citieslist.data.City
+import com.code1.testair2.feature.citieslist.domain.model.CityInlinedDomainModel
 import lt.code1.testair.network.BASE_WEATHER_ICON_API_URL
 import timber.log.Timber
 
@@ -18,9 +18,9 @@ class CityItemViewHolder(
     private val context: Context,
     private val binding: ItemCityBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(city: City) {
+    fun bind(city: CityInlinedDomainModel) {
         Timber.d("bind(), cityId=${city.id}")
-        binding.item = City(
+        binding.item = CityInlinedDomainModel(
             city.id,
             city.name,
             city.dt,

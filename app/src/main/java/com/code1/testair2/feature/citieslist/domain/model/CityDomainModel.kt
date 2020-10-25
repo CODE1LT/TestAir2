@@ -34,3 +34,4 @@ fun CityDomainModel.toEntity() = CitiesListEntity(
         Weather(it.description, it.icon)
     }
 )
+

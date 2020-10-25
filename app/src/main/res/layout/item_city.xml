@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="lt.code1.testair.features.citieslist.data.City" />
+            type="com.code1.testair2.feature.citieslist.domain.model.CityInlinedDomainModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import lt.code1.testair.R
 import lt.code1.testair.base.DataBindingAdapter
 import lt.code1.testair.databinding.ItemCityBinding
-import lt.code1.testair.features.citieslist.data.City
+import com.code1.testair2.feature.citieslist.domain.model.CityInlinedDomainModel
 import timber.log.Timber
 
 class CitiesListAdapter (
     private val context: Context
-) : DataBindingAdapter<City, RecyclerView.ViewHolder>() {
+) : DataBindingAdapter<CityInlinedDomainModel, RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int) = R.layout.item_city
 
