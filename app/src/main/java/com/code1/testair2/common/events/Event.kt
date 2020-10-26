@@ -1,4 +1,4 @@
-package com.seasnve.watts.common.events
+package com.code1.testair2.common.events
 
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.

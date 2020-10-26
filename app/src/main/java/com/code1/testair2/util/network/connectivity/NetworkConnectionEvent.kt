@@ -8,8 +8,8 @@ import android.net.*
 import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
 import android.os.Build
 import androidx.lifecycle.LiveData
+import com.code1.testair2.common.events.Event
 import com.code1.testair2.util.Application
-import com.seasnve.watts.common.events.Event
 import javax.inject.Inject
 
 @Suppress("DEPRECATION")

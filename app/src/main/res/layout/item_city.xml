@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.code1.testair2.feature.citieslist.domain.model.CityInlinedDomainModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/i_user_cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/full_rounded_shape"
+        android:clipToPadding="true"
+        tools:background="@color/green">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/rv_item_default_guidline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/rv_item_default_guidline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/rv_item_default_guidline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/rv_item_default_guidline" />
+
+        <TextView
+            android:id="@+id/i_city_tv_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:fontFamily="@font/weezerfont"
+            android:includeFontPadding="false"
+            android:text="@{item.temp}"
+            android:textColor="@color/white"
+            android:textSize="80sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/i_city_tv_day_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/i_city_iv_weather_icon"
+            tools:text="14" />
+
+        <TextView
+            android:id="@+id/i_city_tv_temperature_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/weezerfont"
+            android:includeFontPadding="false"
+            android:text="@string/i_city_tv_temperature_symbol_text"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            app:layout_constraintStart_toEndOf="@id/i_city_tv_temperature"
+            app:layout_constraintTop_toTopOf="@id/i_city_tv_temperature" />
+
+        <TextView
+            android:id="@+id/i_city_tv_city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/weezerfont"
+            android:includeFontPadding="false"
+            android:text="@{item.name}"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+            app:layout_constraintStart_toStartOf="@id/left_guideline"
+            app:layout_constraintTop_toBottomOf="@id/i_city_tv_day_name"
+            tools:text="Vilnius" />
+
+        <TextView
+            android:id="@+id/i_city_tv_day_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/weezerfont"
+            android:includeFontPadding="false"
+            android:text="@{item.dayName}"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/i_city_tv_day_number"
+            app:layout_constraintEnd_toStartOf="@id/right_guideline"
+            tools:text="SAT" />
+
+        <TextView
+            android:id="@+id/i_city_tv_day_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/weezerfont"
+            android:includeFontPadding="false"
+            android:text="@{item.dayNumber}"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+            app:layout_constraintEnd_toEndOf="@id/i_city_tv_day_name"
+            app:layout_constraintStart_toStartOf="@id/i_city_tv_day_name"
+            tools:text="01" />
+
+        <ImageView
+            android:id="@+id/i_city_iv_weather_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toTopOf="@id/i_city_tv_temperature"
+            app:layout_constraintStart_toStartOf="@id/left_guideline"
+            app:layout_constraintTop_toTopOf="@id/top_guideline"
+            tools:srcCompat="@drawable/ic_rain_for_testing"
+            tools:ignore="ContentDescription"/>
+
+        <TextView
+            android:id="@+id/i_city_tv_weather_desrciption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/weezerfont"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:text="@{item.description}"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/i_city_iv_weather_icon"
+            app:layout_constraintEnd_toStartOf="@id/right_guideline"
+            app:layout_constraintStart_toEndOf="@id/i_city_iv_weather_icon"
+            app:layout_constraintTop_toTopOf="@id/i_city_iv_weather_icon"
+            tools:text="Broken clouds" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

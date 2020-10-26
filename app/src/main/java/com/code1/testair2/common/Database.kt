@@ -3,14 +3,16 @@ package com.code1.testair2.common
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.code1.testair2.feature.citieslist.data.local.CitiesDao
+import com.code1.testair2.feature.citieslist.data.local.CityEntity
 
-//@Database(
-//    entities = [
-//        UserEntity::class,
-//    ], version = 1, exportSchema = false
-//)
-//@TypeConverters(Converters::class)
-//abstract class WattsDatabase : RoomDatabase() {
-//
-//    abstract fun userDao(): UserDao
-//}
+@Database(
+    entities = [
+        CityEntity::class,
+    ], version = 1, exportSchema = false
+)
+@TypeConverters(Converters::class)
+abstract class Database : RoomDatabase() {
+
+    abstract fun citiesDao(): CitiesDao
+}

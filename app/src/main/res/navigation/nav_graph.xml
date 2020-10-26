@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layoyt></layoyt>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedIds"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/citySearch">
 
-
-<!--<navigation xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    tools:ignore="UnusedIds"-->
-<!--    android:id="@+id/nav_graph"-->
-<!--    app:startDestination="@id/citySearch">-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/citySearch"-->
-<!--        android:name="lt.code1.testair.features.citysearch.CitySearchFragment"-->
-<!--        android:label="fragment_city_search"-->
-<!--        tools:layout="@layout/fragment_city_search" >-->
-<!--        <action-->
-<!--            android:id="@+id/action_citySearch_to_citiesList"-->
-<!--            app:destination="@id/citiesList"-->
-<!--            app:enterAnim="@anim/nav_default_enter_anim"-->
-<!--            app:exitAnim="@anim/nav_default_exit_anim"-->
-<!--            app:launchSingleTop="true"-->
-<!--            app:popEnterAnim="@anim/nav_default_pop_enter_anim"-->
-<!--            app:popExitAnim="@anim/nav_default_pop_exit_anim" />-->
-<!--    </fragment>-->
-<!--    <fragment-->
-<!--        android:id="@+id/citiesList"-->
-<!--        android:name="lt.code1.testair.features.citieslist.CitiesListFragment"-->
-<!--        android:label="fragment_cities_list"-->
-<!--        tools:layout="@layout/fragment_cities_list" >-->
-<!--        <argument-->
-<!--            android:name="cityName"-->
-<!--            app:argType="string"-->
-<!--            app:nullable="true" />-->
-<!--    </fragment>-->
-<!--</navigation>-->
+    <fragment
+        android:id="@+id/citySearch"
+        android:name="com.code1.testair2.feature.citysearch.presentation.CitySearchFragment"
+        android:label="fragment_city_search"
+        tools:layout="@layout/fragment_city_search" >
+        <action
+            android:id="@+id/action_citySearch_to_citiesList"
+            app:destination="@id/citiesList"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/citiesList"
+        android:name="com.code1.testair2.feature.citieslist.presentation.CitiesListFragment"
+        android:label="fragment_cities_list"
+        tools:layout="@layout/fragment_cities_list" >
+        <argument
+            android:name="cityName"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+</navigation>

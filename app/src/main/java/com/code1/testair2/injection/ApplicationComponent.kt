@@ -2,6 +2,7 @@ package com.code1.testair2.injection
 
 import com.code1.testair2.common.LoggerModule
 import com.code1.testair2.common.NetworkErrorFormatterModule
+import com.code1.testair2.injection.remotemodules.CitiesListModule
 import com.code1.testair2.injection.remotemodules.NetworkModule
 import com.code1.testair2.util.Application
 import dagger.BindsInstance
@@ -17,7 +18,8 @@ import javax.inject.Singleton
         ActivityBuilder::class,
         AndroidSupportInjectionModule::class,
         ApplicationModule::class,
-        //DatabaseModule::class,
+        CitiesListModule::class,
+        DatabaseModule::class,
         LoggerModule::class,
         NetworkErrorFormatterModule::class,
         NetworkModule::class,
