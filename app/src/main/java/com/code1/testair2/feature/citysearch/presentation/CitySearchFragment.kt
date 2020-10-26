@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavHostController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.code1.testair2.R
 import com.code1.testair2.common.errorhandler.ErrorHandler
@@ -16,7 +14,6 @@ import com.code1.testair2.databinding.FragmentCitySearchBinding
 import com.code1.testair2.feature.citieslist.presentation.CitiesListFragmentArgs
 import com.code1.testair2.util.SoftInputHelper
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.activity_launcher.*
 import timber.log.Timber
 import javax.inject.Inject
 

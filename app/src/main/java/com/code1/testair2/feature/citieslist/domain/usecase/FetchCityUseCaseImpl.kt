@@ -7,11 +7,8 @@ import com.code1.testair2.feature.citieslist.domain.CitiesRepository
 import com.code1.testair2.feature.citieslist.domain.model.CitiesListDomainModel
 import com.code1.testair2.feature.citieslist.domain.model.CityInlinedDomainModel
 import com.code1.testair2.feature.citieslist.domain.model.WeatherDomainModel
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 

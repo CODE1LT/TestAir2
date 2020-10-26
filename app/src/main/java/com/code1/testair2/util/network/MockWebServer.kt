@@ -11,7 +11,7 @@ class MockWebServer @Inject constructor(
     private val requestDispatcher: RequestDispatcher
 ) {
     fun start(context: Context) {
-        Thread(Runnable {
+        Thread({
             MockWebServer().run {
                 dispatcher = requestDispatcher.get(context)
                 start(SERVER_PORT)
