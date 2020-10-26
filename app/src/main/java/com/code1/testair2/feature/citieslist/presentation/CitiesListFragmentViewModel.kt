@@ -26,11 +26,11 @@ class CitiesListFragmentViewModel @Inject constructor(
             fetchCityUseCase.invoke(cityName ?: "").collect { result ->
                 when (result) {
                     is Result.Success -> {
-                        loading.value = false
+                        //loading.value = false
                         cityList.value = result.data
                     }
                     is Result.Error -> {
-                        loading.value = false
+                        //loading.value = false
                         onError.value = Event(result.exception)
                     }
                 }

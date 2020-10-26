@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.code1.testair2.R
@@ -15,6 +16,7 @@ import com.code1.testair2.core.ViewModelFactory
 import com.code1.testair2.databinding.FragmentCitiesListBinding
 import com.code1.testair2.feature.citieslist.presentation.list.CitiesListAdapter
 import com.code1.testair2.feature.citieslist.presentation.list.MarginItemDecoration
+import com.code1.testair2.feature.launcher.presentation.LauncherViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_cities_list.*
 import timber.log.Timber
@@ -22,6 +24,8 @@ import javax.inject.Inject
 
 
 class CitiesListFragment : DaggerFragment() {
+
+    private val parentViewModel by activityViewModels<LauncherViewModel>()
 
     private lateinit var binding: FragmentCitiesListBinding
 
@@ -62,6 +66,7 @@ class CitiesListFragment : DaggerFragment() {
         setupRecyclerView()
         observeCitiesList()
         observeOnError()
+        observeLoadingState()
         loadCityData()
     }
 
@@ -102,6 +107,19 @@ class CitiesListFragment : DaggerFragment() {
             EventObserver { exception ->
                 errorHandler.showError(requireView(), exception.message ?: "")
                 findNavController().navigateUp()
+            })
+    }
+
+    private fun observeLoadingState() {
+        Timber.d("observeLoadingState()")
+        citiesListFragmentViewModel.loading.observe(
+            viewLifecycleOwner,
+            { isLoading ->
+                if (isLoading) {
+                    parentViewModel.showLoading()
+                } else {
+                    parentViewModel.hideLoading()
+                }
             })
     }
 

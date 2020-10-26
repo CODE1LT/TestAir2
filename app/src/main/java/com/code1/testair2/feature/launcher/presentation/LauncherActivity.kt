@@ -32,11 +32,6 @@ class LauncherActivity : DaggerAppCompatActivity() {
         dataBinding.viewModel = viewModel
     }
 
-    fun onUpClick() {
-        Timber.d("onUpClick()")
-        onSupportNavigateUp()
-    }
-
     override fun onSupportNavigateUp() =
         findNavController(R.id.navHostFragment).navigateUp()
 
