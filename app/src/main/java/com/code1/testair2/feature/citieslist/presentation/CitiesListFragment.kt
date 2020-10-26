@@ -129,7 +129,7 @@ class CitiesListFragment : DaggerFragment() {
             if (it != "") {
                 citiesListFragmentViewModel.getCity()
             } else {
-                //citiesListFragmentViewModel.getSearchHistory()
+                citiesListFragmentViewModel.getSearchHistory()
             }
         }
     }
