@@ -3,5 +3,7 @@
     <base-config cleartextTrafficPermitted="false" />
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="false">localhost</domain>
+        <domain includeSubdomains="true">api.openweathermap.org</domain>
+        <domain includeSubdomains="true">openweathermap.org</domain>
     </domain-config>
 </network-security-config>

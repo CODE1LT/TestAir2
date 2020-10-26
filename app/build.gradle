@@ -94,7 +94,7 @@ android {
             debuggable true
             manifestPlaceholders = [
                     //crashlyticsCollectionEnabled: "false",
-                                    networkSecurityConfig: "@xml/cleartext_traffic_forbidden"]
+                                    networkSecurityConfig: "@xml/cleartext_traffic_permited"]
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
         }
