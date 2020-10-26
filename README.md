@@ -1,12 +1,12 @@
 # Brief description of functionality
 
-Best practices of clear, readable & extendable code applied. The reusable part of code has unit tests. Wheather information is retrieved from openweathermap.org API.
+Best practices of clear, readable & extendable code applied. Wheather information is retrieved from openweathermap.org API.
 
 ## Application screenshots
 <img src="http://www.code1.lt/testair1.png" width="400">  <img src="http://www.code1.lt/testair2.png" width="400">
 
 ## Technologies used
-MVVM/VIPER/MVI architecture mixture, Livedata, Navigation component, Data binding, Room, Coroutines, OkHTTP, Retrofit, Moshi, Airbnb Lottie, Glide, Mockito, Custom font
+MVVM/VIPER/MVI architecture mixture, Livedata, Navigation component, Data binding, Room, Coroutines (+ Flow), OkHTTP, Retrofit, Gson, Airbnb Lottie, Glide, Custom font
 
 ## HTTP request syntax
 to retrieve city by name:
