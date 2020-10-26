@@ -1,5 +1,6 @@
 package com.code1.testair2.feature.citieslist.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,9 @@ import javax.inject.Inject
 class CitiesListFragment : DaggerFragment() {
 
     private lateinit var binding: FragmentCitiesListBinding
+
+    @Inject
+    lateinit var application: Context
 
     @Inject
     lateinit var errorHandler: ErrorHandler
@@ -79,7 +83,7 @@ class CitiesListFragment : DaggerFragment() {
             .toInt()
             .let { MarginItemDecoration(it) }
             .let { f_cities_list_recycler_view.addItemDecoration(it) }
-        f_cities_list_recycler_view.adapter = activity?.application?.let { CitiesListAdapter(it) }
+        f_cities_list_recycler_view.adapter = CitiesListAdapter(application)
     }
 
     private fun observeCitiesList() {

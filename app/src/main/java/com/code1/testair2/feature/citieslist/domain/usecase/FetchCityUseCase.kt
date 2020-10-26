@@ -5,5 +5,5 @@ import com.code1.testair2.common.Result
 import com.code1.testair2.feature.citieslist.domain.model.CityInlinedDomainModel
 
 interface FetchCityUseCase {
-    suspend operator fun invoke(cityName: String): Flow<Result<List<CityInlinedDomainModel>>>
+    operator fun invoke(cityName: String): Flow<Result<List<CityInlinedDomainModel>>>
 }

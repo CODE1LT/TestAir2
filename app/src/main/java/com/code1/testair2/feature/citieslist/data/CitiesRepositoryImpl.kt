@@ -25,12 +25,13 @@ class CitiesRepositoryImpl @Inject constructor(
     private val getCitiesListService: GetCitiesListService
 ) : CitiesRepository {
 
-    override suspend fun fetchCity(city: String): Flow<Result<List<CitiesListDomainModel>>> {
+    override fun fetchCity(city: String): Flow<Result<List<CitiesListDomainModel>>> {
         return flow<Result<List<CitiesListDomainModel>>> {
             val response = getCityService.getCity(city + COUNTRY_CODE).unwrap()
             saveCityId(listOf(response.toEntity()))
             cityDataSource.cleanupSearchHistory()
-            emit(Result.Success(listOf(response.toDomainModel())))
+            val result = listOf(response.toDomainModel())
+            emit(Result.Success(result))
         }.catch { throwable ->
             Timber.e(throwable)
             emit(Result.Error(Exception(throwable)))
@@ -49,7 +50,7 @@ class CitiesRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getCitiesList(): Flow<Result<List<CitiesListDomainModel>>> {
+    override fun getCitiesList(): Flow<Result<List<CitiesListDomainModel>>> {
         return flow<Result<List<CitiesListDomainModel>>> {
             val citiesIds =
                 cityDataSource.queryCities()?.map { it.cityId }?.joinToString()

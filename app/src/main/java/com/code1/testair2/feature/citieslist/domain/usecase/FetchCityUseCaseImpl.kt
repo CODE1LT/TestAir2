@@ -7,22 +7,30 @@ import com.code1.testair2.feature.citieslist.domain.CitiesRepository
 import com.code1.testair2.feature.citieslist.domain.model.CitiesListDomainModel
 import com.code1.testair2.feature.citieslist.domain.model.CityInlinedDomainModel
 import com.code1.testair2.feature.citieslist.domain.model.WeatherDomainModel
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 class FetchCityUseCaseImpl(
     private val citiesRepository: CitiesRepository
 ) : FetchCityUseCase {
-    override suspend fun invoke(cityName: String): Flow<Result<List<CityInlinedDomainModel>>> =
-        citiesRepository.fetchCity(cityName)
+    override fun invoke(cityName: String): Flow<Result<List<CityInlinedDomainModel>>> {
+        return citiesRepository.fetchCity(cityName)
             .map { result ->
                 when (result) {
-                    is Result.Success -> Result.Success(inlineCityData(result.data))
-                    is Result.Error -> Result.Error(result.exception)
+                    is Result.Success -> {
+                        Result.Success(inlineCityData(result.data))
+                    }
+                    is Result.Error -> {
+                        Result.Error(result.exception)
+                    }
                 }
             }
+    }
 
     private fun inlineCityData(citiesList: List<CitiesListDomainModel>): List<CityInlinedDomainModel> {
 
