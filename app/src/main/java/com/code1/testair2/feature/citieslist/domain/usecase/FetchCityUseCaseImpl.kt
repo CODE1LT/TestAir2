@@ -2,17 +2,29 @@ package com.code1.testair2.feature.citieslist.domain.usecase
 
 import android.annotation.SuppressLint
 import android.text.format.DateFormat
-import lt.code1.testair.datalayer.cities.entities.CitiesListEntity
+import com.code1.testair2.common.Result
+import com.code1.testair2.feature.citieslist.domain.CitiesRepository
+import com.code1.testair2.feature.citieslist.domain.model.CitiesListDomainModel
 import com.code1.testair2.feature.citieslist.domain.model.CityInlinedDomainModel
-import lt.code1.testair.network.services.cities.pojos.Weather
+import com.code1.testair2.feature.citieslist.domain.model.WeatherDomainModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 
-class CitiesListMapper @Inject constructor() :
-    @JvmSuppressWildcards Function1<@JvmSuppressWildcards List<CitiesListEntity>, @JvmSuppressWildcards List<CityInlinedDomainModel>> {
+class FetchCityUseCaseImpl(
+    private val citiesRepository: CitiesRepository
+) : FetchCityUseCase {
+    override suspend fun invoke(cityName: String): Flow<Result<List<CityInlinedDomainModel>>> =
+        citiesRepository.fetchCity(cityName)
+            .map { result ->
+                when (result) {
+                    is Result.Success -> Result.Success(inlineCityData(result.data))
+                    is Result.Error -> Result.Error(result.exception)
+                }
+            }
 
-    override fun invoke(citiesList: List<CitiesListEntity>): List<CityInlinedDomainModel> {
+    private fun inlineCityData(citiesList: List<CitiesListDomainModel>): List<CityInlinedDomainModel> {
 
         val citiesListMapped = arrayListOf<CityInlinedDomainModel>()
         citiesList.forEach { citiesListItem ->
@@ -35,21 +47,21 @@ class CitiesListMapper @Inject constructor() :
         return citiesListMapped
     }
 
-    private fun getDescription(weatherList: List<Weather>?): String {
-        val descriptionsList = weatherList?.map { it.description } as ArrayList
-        return descriptionsList.joinToString()
-    }
-
     @SuppressLint("SimpleDateFormat")
     private fun getDayName(date: Long?): String {
         return SimpleDateFormat("EEEE").format(getDateObject(date)).toUpperCase(Locale.getDefault())
             .substring(0, 3)
     }
 
+    private fun getDateObject(date: Long?) = Date(date?.times(1000) ?: 0L)
+
     private fun getDayNumber(date: Long?): String {
         return DateFormat.format("dd", getDateObject(date)).toString()
     }
 
-    private fun getDateObject(date: Long?) = Date(date?.times(1000) ?: 0L)
+    private fun getDescription(weatherList: List<WeatherDomainModel>?): String {
+        val descriptionsList = weatherList?.map { it.description } as ArrayList
+        return descriptionsList.joinToString()
+    }
 
 }

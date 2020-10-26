@@ -1,4 +1,4 @@
-package lt.code1.testair.features.citieslist.list
+package com.code1.testair2.feature.citieslist.presentation.list
 
 import android.graphics.Rect
 import android.view.View

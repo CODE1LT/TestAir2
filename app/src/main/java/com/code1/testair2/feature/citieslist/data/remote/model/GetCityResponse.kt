@@ -2,6 +2,7 @@ package com.code1.testair2.feature.citieslist.data.remote.model
 
 import com.code1.testair2.feature.citieslist.data.local.CitiesListEntity
 import com.code1.testair2.feature.citieslist.domain.model.CitiesListDomainModel
+import com.code1.testair2.feature.citieslist.domain.model.WeatherDomainModel
 import com.google.gson.annotations.SerializedName
 
 data class GetCityResponse(
@@ -31,7 +32,9 @@ fun GetCityResponse.toDomainModel() = CitiesListDomainModel(
     temp_min = main?.temp_min,
     temp_max = main?.temp_max,
     icon = weather?.get(0)?.icon,
-    description = weather
+    description = weather?.map {
+        WeatherDomainModel(it.description, it.icon)
+    }
 )
 
 fun GetCityResponse.toEntity() =             CitiesListEntity(

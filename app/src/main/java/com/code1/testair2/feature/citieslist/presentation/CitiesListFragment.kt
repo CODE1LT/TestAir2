@@ -1,107 +1,114 @@
 package com.code1.testair2.feature.citieslist.presentation
 
-import android.content.Context
 import android.os.Bundle
-import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import es.dmoral.toasty.Toasty
-import lt.code1.testair.NavigationHost
-import lt.code1.testair.R
-import lt.code1.testair.base.BaseFragment
-import lt.code1.testair.databinding.FragmentCitiesListBinding
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import com.code1.testair2.R
+import com.code1.testair2.common.errorhandler.ErrorHandler
+import com.code1.testair2.common.events.EventObserver
+import com.code1.testair2.core.ViewModelFactory
+import com.code1.testair2.databinding.FragmentCitiesListBinding
+import com.code1.testair2.feature.citieslist.presentation.list.CitiesListAdapter
+import com.code1.testair2.feature.citieslist.presentation.list.MarginItemDecoration
+import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_cities_list.*
 import timber.log.Timber
+import javax.inject.Inject
 
 
-class CitiesListFragment : BaseFragment() {
+class CitiesListFragment : DaggerFragment() {
 
-    private var navigationHost: NavigationHost? = null
-    private lateinit var citiesListFragmentViewModel: CitiesListFragmentViewModel
-    private lateinit var fragmentCityListBinding: FragmentCitiesListBinding
-    override val layoutId = R.layout.fragment_cities_list
-    override val viewModelClass = CitiesListFragmentViewModel::class
-    private val args: CitiesListFragmentArgs by navArgs()
+    private lateinit var binding: FragmentCitiesListBinding
+
+    @Inject
+    lateinit var errorHandler: ErrorHandler
+
+    @Inject
+    lateinit var citiesListFragmentViewModelFactory: ViewModelFactory<CitiesListFragmentViewModel>
+
+    private val citiesListFragmentViewModel by lazy {
+        ViewModelProviders
+            .of(this, citiesListFragmentViewModelFactory)
+            .get(CitiesListFragmentViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.d("onCreate()")
         super.onCreate(savedInstanceState)
     }
 
-    override fun onAttach(context: Context) {
-        Timber.d("onAttach()")
-        super.onAttach(context)
-        navigationHost = context as NavigationHost
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentCitiesListBinding.inflate(inflater)
+        binding.lifecycleOwner = viewLifecycleOwner
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.d("onViewCreated()")
         super.onViewCreated(view, savedInstanceState)
-        addReferencesToViewsAndViewModel()
         setupActionBar()
-        observeNotificationEvent()
+        setupRecyclerView()
+        observeCitiesList()
+        observeOnError()
         loadCityData()
-    }
-
-    private fun addReferencesToViewsAndViewModel() {
-        Timber.d("addReferencesToViewsAndViewModel()")
-        citiesListFragmentViewModel = getViewModel() as CitiesListFragmentViewModel
-        fragmentCityListBinding = viewDataBinding as FragmentCitiesListBinding
     }
 
     private fun setupActionBar() {
         Timber.d("setupActionBar()")
-        (activity as AppCompatActivity).setSupportActionBar(fragmentCityListBinding.fCitiesListToolbar)
+        (activity as AppCompatActivity).setSupportActionBar(binding.fCitiesListToolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
-        fragmentCityListBinding.fCitiesListToolbar.setNavigationOnClickListener { onUpClick() }
+        binding.fCitiesListToolbar.setNavigationOnClickListener { onUpClick() }
     }
 
     private fun onUpClick() {
         Timber.d("onUpClick()")
-        navigationHost?.onUpClick()
+        findNavController().navigateUp()
     }
 
-    private fun observeNotificationEvent() {
-        Timber.d("observeNotificationEvent()")
-        citiesListFragmentViewModel.notificationEvent.observe(
+    private fun setupRecyclerView() {
+        resources.getDimension(R.dimen.rv_default_padding)
+            .toInt()
+            .let { MarginItemDecoration(it) }
+            .let { f_cities_list_recycler_view.addItemDecoration(it) }
+        f_cities_list_recycler_view.adapter = activity?.application?.let { CitiesListAdapter(it) }
+    }
+
+    private fun observeCitiesList() {
+        Timber.d("observeCitiesList()")
+        citiesListFragmentViewModel.cityList.observe(
             viewLifecycleOwner,
-            Observer { notification ->
-                if (!notification.isOperationSuccessfull) {
-                    showFailureNotification(notification.unsuccessMessage)
-                    navigationHost?.onUpClick()
-                }
+            { cityList ->
+                (f_cities_list_recycler_view.adapter as CitiesListAdapter).submitList(cityList)
             })
     }
 
-    private fun showFailureNotification(message: String) {
-        Toasty.error(
-            requireActivity(),
-            message,
-            Toast.LENGTH_SHORT,
-            true
-        )
-            .apply {
-                setGravity(Gravity.TOP, 0, 80)
-                show()
-            }
+    private fun observeOnError() {
+        Timber.d("observeOnError()")
+        citiesListFragmentViewModel.onError.observe(
+            viewLifecycleOwner,
+            EventObserver { exception ->
+                errorHandler.showError(requireView(), exception.message ?: "")
+                findNavController().navigateUp()
+            })
     }
 
     private fun loadCityData() {
-        Timber.d("loadUserData()")
-        args.cityName?.let {
+        Timber.d("loadCityData()")
+        CitiesListFragmentArgs.fromBundle(this.requireArguments()).cityName?.let {
             if (it != "") {
-                citiesListFragmentViewModel.getCity(it)
+                citiesListFragmentViewModel.getCity()
             } else {
-                citiesListFragmentViewModel.getSearchHistory()
+                //citiesListFragmentViewModel.getSearchHistory()
             }
         }
-    }
-
-    override fun onDetach() {
-        Timber.d("onDetach()")
-        super.onDetach()
-        navigationHost = null
     }
 }

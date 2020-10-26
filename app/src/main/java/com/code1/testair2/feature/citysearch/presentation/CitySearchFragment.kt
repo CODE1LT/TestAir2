@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavHostController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.code1.testair2.R
 import com.code1.testair2.common.errorhandler.ErrorHandler
 import com.code1.testair2.common.events.EventObserver
 import com.code1.testair2.core.ViewModelFactory
 import com.code1.testair2.databinding.FragmentCitySearchBinding
+import com.code1.testair2.feature.citieslist.presentation.CitiesListFragmentArgs
 import com.code1.testair2.util.SoftInputHelper
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_launcher.*
@@ -87,8 +90,6 @@ class CitySearchFragment : DaggerFragment() {
     }
 
     private fun navigateTo(id: Int, bundle: Bundle? = null) {
-        val navHostFragment = navHostFragment as NavHostFragment
-        val navController = navHostFragment.navController
-        navController.navigate(id, bundle)
+        findNavController().navigate(id, bundle)
     }
 }

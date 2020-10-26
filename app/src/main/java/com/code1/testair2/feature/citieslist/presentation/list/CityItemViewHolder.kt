@@ -1,12 +1,12 @@
-package lt.code1.testair.features.citieslist.list
+package com.code1.testair2.feature.citieslist.presentation.list
 
 import android.content.Context
 import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import lt.code1.testair.databinding.ItemCityBinding
+import com.code1.testair2.databinding.ItemCityBinding
 import com.code1.testair2.feature.citieslist.domain.model.CityInlinedDomainModel
-import lt.code1.testair.network.BASE_WEATHER_ICON_API_URL
+import com.code1.testair2.injection.remotemodules.BASE_WEATHER_ICON_API_URL
 import timber.log.Timber
 
 private const val WEATHER_ICON_TYPE = "@2x.png"
